@@ -1,0 +1,10 @@
+Commits:
+
+
+Instalacion de las dependencias(production):
+
+$ npm install bcrypt-nodejs body-parser cors express express-handlebars mongoose morgan multer passport
+
+Instalacion de las dependencias (Desarrollo) nodemon:
+
+$ npm install nodemon -Dev --save
