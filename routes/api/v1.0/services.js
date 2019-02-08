@@ -146,4 +146,23 @@ route.post('/anadircompra', (req, res, next)=>{
 })
 
 
+//mostrar el carrito de compras
+route.get('/carrito',(req, res, next)=>{
+
+    Ventas.find({},(err, carritos)=>{
+        console.log(carritos)
+        const carritos2 = carritos.map(u=>{
+            return({
+                carrito:u.carrito,
+                id: u._id,
+                id_user: u.id_user,
+                id_product: u.id_product          
+            })
+        })
+        res.status(200).send(carritos2)
+    })
+    
+});
+
+
 module.exports = route
