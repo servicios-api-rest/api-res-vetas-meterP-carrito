@@ -156,7 +156,7 @@ route.get('/carrito',(req, res, next)=>{
                 carrito:u.carrito,
                 id: u._id,
                 id_user: u.id_user,
-                id_product: u.id_product          
+                         
             })
         })
         res.status(200).send(carritos2)
