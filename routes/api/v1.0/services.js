@@ -113,10 +113,10 @@ route.post('/anadircompra', (req, res, next)=>{
     
     Product.find({_id:id_product},(err, p)=>{
           prod=p[0]
-          console.log(p[0])
+         // console.log(p[0])
     })
     
-    console.log(prod)
+    //console.log(prod)
 
     Ventas.findOne({id_user:id_user},(err, resp)=>{
             if(resp){
@@ -127,6 +127,7 @@ route.post('/anadircompra', (req, res, next)=>{
                 array.carrito.push(prod)
 
                 Ventas.findOneAndUpdate({_id : resp._id}, array, (err, params)=>{
+                    console.log("Ptoducto Añadido al carrito Ok")
                     if (err) {
                         res.status(500).json({
                           "msn" : "error en la actualizacion del usuario"
@@ -147,6 +148,7 @@ route.post('/anadircompra', (req, res, next)=>{
                         res.status(404).send({message:`error al salvar los datos ${err}`})
                     }
                     res.status(200).send(carrito);
+                    console.log("Prodcto Añadido al Carrito Ok")
                 });
             }
     })
