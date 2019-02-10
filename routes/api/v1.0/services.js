@@ -104,10 +104,19 @@ route.get('/products', (req, res, next)=>{
 // ------Añadir productos al carrito (Ventas)-----------------
 
 route.post('/anadircompra', (req, res, next)=>{
-    console.log(req.body);
+    //console.log(req.body);
 
     var id_user = req.body.id_user;
     var id_product = req.body.id_product;
+
+   var prod
+    
+    Product.find({_id:id_product},(err, p)=>{
+          prod=p[0]
+          console.log(p[0])
+    })
+    
+    console.log(prod)
 
     Ventas.findOne({id_user:id_user},(err, resp)=>{
             if(resp){
@@ -115,7 +124,7 @@ route.post('/anadircompra', (req, res, next)=>{
                     carrito: new Array()
                 };
                 array.carrito=resp.carrito;
-                array.carrito.push(id_product)
+                array.carrito.push(prod)
 
                 Ventas.findOneAndUpdate({_id : resp._id}, array, (err, params)=>{
                     if (err) {
@@ -131,7 +140,7 @@ route.post('/anadircompra', (req, res, next)=>{
             {
                 var venta = new Ventas();
                 venta.id_user = id_user
-                venta.carrito = [id_product]
+                venta.carrito = prod
             
                 venta.save((err, carrito)=>{
                     if(err){
@@ -144,6 +153,7 @@ route.post('/anadircompra', (req, res, next)=>{
 
 
 })
+
 
 
 //mostrar el carrito de compras
@@ -160,9 +170,11 @@ route.get('/carrito',(req, res, next)=>{
             })
         })
         res.status(200).send(carritos2)
+        
     })
     
 });
+
 
 
 module.exports = route
