@@ -152,8 +152,6 @@ route.post('/anadircompra', (req, res, next)=>{
     
     //console.log(prod)
 
-    
-
 
 })
 
