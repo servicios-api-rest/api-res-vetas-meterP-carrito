@@ -104,21 +104,17 @@ route.get('/products', (req, res, next)=>{
 // ------Añadir productos al carrito (Ventas)-----------------
 
 route.post('/anadircompra', (req, res, next)=>{
-    //console.log(req.body);
+    console.log(req.body);
 
     var id_user = req.body.id_user;
     var id_product = req.body.id_product;
 
-   var prod
+   
     
     Product.find({_id:id_product},(err, p)=>{
-          prod=p[0]
-         // console.log(p[0])
-    })
-    
-    //console.log(prod)
-
-    Ventas.findOne({id_user:id_user},(err, resp)=>{
+          const prod=p[0]
+         //console.log(p[0])
+         Ventas.findOne({id_user:id_user},(err, resp)=>{
             if(resp){
                 var array={
                     carrito: new Array()
@@ -151,7 +147,12 @@ route.post('/anadircompra', (req, res, next)=>{
                     console.log("Prodcto Añadido al Carrito Ok")
                 });
             }
+        })
     })
+    
+    //console.log(prod)
+
+    
 
 
 })
